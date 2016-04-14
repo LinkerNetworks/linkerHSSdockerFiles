@@ -8,6 +8,6 @@ echo "Stack Configured"
 
 cd /linker/stack
 
-./start-stack.sh
+./start-decoder.sh
 
-echo "stack Started"
+echo "Decoder Started"
