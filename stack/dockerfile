@@ -17,6 +17,11 @@ RUN ln -s /usr/lib64/libtasn1.so.6.2.3 /usr/lib64/libtasn1.so.3
 
 RUN yum install -y openssl
 
+RUN yum install -y python-setuptools && \
+    easy_install supervisor
+
+ADD supervisord.conf /etc/supervisord.conf
+
 RUN ln -s /usr/lib64/libprotobuf-c.so.1 /usr/lib64/libprotobuf-c.so.0
 
 #ADD libgnutls.so.28.41.0 /usr/lib64/libgnutls.so.26
@@ -28,4 +33,6 @@ RUN chmod 755 /entrypoint.sh
 
 EXPOSE 3868 3869 7000-8000
 
-ENTRYPOINT ["/entrypoint.sh"]
+ENTRYPOINT ["/usr/bin/supervisord"]
+
+CMD ["-n", "-c", "/etc/supervisord.conf"]
