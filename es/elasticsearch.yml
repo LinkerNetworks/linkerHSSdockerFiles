@@ -1,4 +1,4 @@
-discovery.zen.ping.unicast.hosts: ["esmaster.linker.com", "es.linker.com"]
+discovery.zen.ping.unicast.hosts: ["esmaster.linker.com", "es.hss.com"]
 network.host: 0.0.0.0
 cluster.name: deves
 #discovery.zen.ping.multicast.enabled: true

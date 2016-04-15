@@ -35,6 +35,11 @@
             "hostPort": 0,
             "servicePort": 10068,
             "protocol": "tcp"
+          }, {
+            "containerPort": 8000,
+            "hostPort": 0,
+            "servicePort": 10089,
+            "protocol": "udp"
           }]
         }
       },
@@ -70,6 +75,9 @@
       "dependencies": [
         "hss"
       ],
+      "labels": {
+        "HAPROXY_GROUP": "linkermgmt"
+      },
       "container": {
         "type": "DOCKER",
         "docker": {
@@ -81,6 +89,12 @@
           }, {
             "key": "net",
             "value": "myoverlay"
+          }],
+          "portMappings": [{
+            "containerPort": 8000,
+            "hostPort": 0,
+            "protocol": "udp",
+            "servicePort": 10088
           }],
           "forcePullImage": true,
           "network": "BRIDGE"
@@ -94,6 +108,9 @@
       "dependencies": [
         "es"
       ],
+      "labels": {
+        "HAPROXY_GROUP": "linkermgmt"
+      },
       "container": {
         "type": "DOCKER",
         "docker": {
@@ -106,6 +123,17 @@
             "key": "net",
             "value": "myoverlay"
           }],
+          "portMappings": [{
+            "containerPort": 5001,
+            "hostPort": 0,
+            "protocol": "tcp",
+            "servicePort": 10051
+          }, {
+            "containerPort": 5002,
+            "hostPort": 0,
+            "protocol": "tcp",
+            "servicePort": 10052
+          }],
           "forcePullImage": true,
           "network": "BRIDGE"
         }
@@ -115,37 +143,16 @@
       "mem": 2048
     }, {
       "id": "es",
-      "dependencies": [
-        "esmaster"
-      ],
-      "container": {
-        "type": "DOCKER",
-        "docker": {
-          "image": "njrepo:5000/linker_es",
-          "privileged": true,
-          "parameters": [{
-            "key": "net-alias",
-            "value": "es.linker.com"
-          }, {
-            "key": "net",
-            "value": "myoverlay"
-          }],
-          "forcePullImage": true,
-          "network": "BRIDGE"
-        }
+      "labels": {
+        "HAPROXY_GROUP": "linkermgmt"
       },
-      "instances": 2,
-      "cpus": 0.1,
-      "mem": 2048
-    }, {
-      "id": "esmaster",
       "container": {
         "type": "DOCKER",
         "docker": {
           "image": "njrepo:5000/linker_es",
           "parameters": [{
             "key": "net-alias",
-            "value": "es.linker.com"
+            "value": "es.hss.com"
           }, {
             "key": "net-alias",
             "value": "esmaster.linker.com"
@@ -154,11 +161,22 @@
             "value": "myoverlay"
           }],
           "privileged": true,
+          "portMappings": [{
+            "containerPort": 9200,
+            "hostPort": 0,
+            "protocol": "tcp",
+            "servicePort": 10092
+          }, {
+            "containerPort": 9300,
+            "hostPort": 0,
+            "protocol": "tcp",
+            "servicePort": 10093
+          }],
           "forcePullImage": true,
           "network": "BRIDGE"
         }
       },
-      "instances": 1,
+      "instances": 2,
       "cpus": 0.1,
       "mem": 2048
     }]

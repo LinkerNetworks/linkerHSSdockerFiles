@@ -18,6 +18,6 @@ RUN chmod 755 /entrypoint.sh
 
 EXPOSE 8000-9000
 
-ENTRYPOINT ["/linker/router/router"]
+ENTRYPOINT ["/usr/bin/supervisord"]
 
-#CMD ["-n", "-c", "/etc/supervisord.conf"]
+CMD ["-n", "-c", "/etc/supervisord.conf"]
