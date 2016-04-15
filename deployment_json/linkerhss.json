@@ -1,0 +1,166 @@
+{
+  "name": "linkerhss",
+  "description": "linkerhss",
+  "group": {
+    "id": "linkerhss",
+    "apps": [{
+      "id": "stack",
+      "dependencies": [
+        "decoder"
+      ],
+      "labels": {
+        "HAPROXY_GROUP": "linkermgmt"
+      },
+      "container": {
+        "type": "DOCKER",
+        "docker": {
+          "image": "njrepo:5000/linker_stack",
+          "privileged": true,
+          "parameters": [{
+            "key": "net-alias",
+            "value": "stack.linker.com"
+          }, {
+            "key": "net",
+            "value": "myoverlay"
+          }],
+          "network": "BRIDGE",
+          "forcePullImage": true,
+          "portMappings": [{
+            "containerPort": 3869,
+            "hostPort": 0,
+            "servicePort": 10069,
+            "protocol": "tcp"
+          }, {
+            "containerPort": 3868,
+            "hostPort": 0,
+            "servicePort": 10068,
+            "protocol": "tcp"
+          }]
+        }
+      },
+      "instances": 1,
+      "cpus": 0.1,
+      "mem": 4096
+    }, {
+      "id": "decoder",
+      "dependencies": [
+        "router"
+      ],
+      "container": {
+        "type": "DOCKER",
+        "docker": {
+          "image": "njrepo:5000/linker_decoder",
+          "privileged": true,
+          "parameters": [{
+            "key": "net-alias",
+            "value": "decoder.linker.com"
+          }, {
+            "key": "net",
+            "value": "myoverlay"
+          }],
+          "forcePullImage": true,
+          "network": "BRIDGE"
+        }
+      },
+      "instances": 2,
+      "cpus": 0.1,
+      "mem": 2048
+    }, {
+      "id": "router",
+      "dependencies": [
+        "hss"
+      ],
+      "container": {
+        "type": "DOCKER",
+        "docker": {
+          "image": "njrepo:5000/linker_router",
+          "privileged": true,
+          "parameters": [{
+            "key": "net-alias",
+            "value": "router.linker.com"
+          }, {
+            "key": "net",
+            "value": "myoverlay"
+          }],
+          "forcePullImage": true,
+          "network": "BRIDGE"
+        }
+      },
+      "instances": 1,
+      "cpus": 0.1,
+      "mem": 4096
+    }, {
+      "id": "hss",
+      "dependencies": [
+        "es"
+      ],
+      "container": {
+        "type": "DOCKER",
+        "docker": {
+          "image": "njrepo:5000/linker_hss",
+          "privileged": true,
+          "parameters": [{
+            "key": "net-alias",
+            "value": "hss.linker.com"
+          }, {
+            "key": "net",
+            "value": "myoverlay"
+          }],
+          "forcePullImage": true,
+          "network": "BRIDGE"
+        }
+      },
+      "instances": 2,
+      "cpus": 0.1,
+      "mem": 2048
+    }, {
+      "id": "es",
+      "dependencies": [
+        "esmaster"
+      ],
+      "container": {
+        "type": "DOCKER",
+        "docker": {
+          "image": "njrepo:5000/linker_es",
+          "privileged": true,
+          "parameters": [{
+            "key": "net-alias",
+            "value": "es.linker.com"
+          }, {
+            "key": "net",
+            "value": "myoverlay"
+          }],
+          "forcePullImage": true,
+          "network": "BRIDGE"
+        }
+      },
+      "instances": 2,
+      "cpus": 0.1,
+      "mem": 2048
+    }, {
+      "id": "esmaster",
+      "container": {
+        "type": "DOCKER",
+        "docker": {
+          "image": "njrepo:5000/linker_es",
+          "parameters": [{
+            "key": "net-alias",
+            "value": "es.linker.com"
+          }, {
+            "key": "net-alias",
+            "value": "esmaster.linker.com"
+          }, {
+            "key": "net",
+            "value": "myoverlay"
+          }],
+          "privileged": true,
+          "forcePullImage": true,
+          "network": "BRIDGE"
+        }
+      },
+      "instances": 1,
+      "cpus": 0.1,
+      "mem": 2048
+    }]
+  }
+}
