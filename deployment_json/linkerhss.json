@@ -178,7 +178,13 @@
       },
       "instances": 2,
       "cpus": 0.1,
-      "mem": 2048
+      "mem": 2048,
+      "env": {
+        "LOAD_USAGE_LOW_THRESHOLD": "5",
+        "LOAD_USAGE_HIGH_THRESHOLD": "10",
+        "IDEAL_NODE_NUMBER": "2",
+        "ALERT_ENABLE": "true"
+      }
     }]
   }
 }
