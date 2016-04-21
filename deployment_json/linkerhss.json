@@ -45,7 +45,13 @@
       },
       "instances": 1,
       "cpus": 0.1,
-      "mem": 4096
+      "mem": 4096,
+      "env": {
+        "TRANSMIT_PACKAGE_NUMBER_LOW_THRESHOLD": "20",
+        "TRANSMIT_PACKAGE_NUMBER_HIGH_THRESHOLD": "100",
+        "IDEAL_NODE_NUMBER": "2",
+        "ALERT_ENABLE": "true"
+      }
     }, {
       "id": "decoder",
       "dependencies": [
@@ -102,7 +108,13 @@
       },
       "instances": 1,
       "cpus": 0.1,
-      "mem": 4096
+      "mem": 4096,
+      "env": {
+        "TRANSMIT_PACKAGE_NUMBER_LOW_THRESHOLD": "20",
+        "TRANSMIT_PACKAGE_NUMBER_HIGH_THRESHOLD": "100",
+        "IDEAL_NODE_NUMBER": "2",
+        "ALERT_ENABLE": "true"
+      }
     }, {
       "id": "hss",
       "dependencies": [
@@ -180,8 +192,8 @@
       "cpus": 0.1,
       "mem": 2048,
       "env": {
-        "LOAD_USAGE_LOW_THRESHOLD": "5",
-        "LOAD_USAGE_HIGH_THRESHOLD": "10",
+        "CPU_USAGE_LOW_THRESHOLD": "20",
+        "CPU_USAGE_HIGH_THRESHOLD": "50",
         "IDEAL_NODE_NUMBER": "2",
         "ALERT_ENABLE": "true"
       }
