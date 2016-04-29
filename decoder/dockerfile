@@ -20,6 +20,8 @@ RUN yum install -y openssl
 RUN yum install -y python-setuptools && \
     easy_install supervisor
 
+RUN yum install -y tcpdump
+
 ADD supervisord.conf /etc/supervisord.conf
 
 RUN ln -s /usr/lib64/libprotobuf-c.so.1 /usr/lib64/libprotobuf-c.so.0
@@ -31,7 +33,7 @@ ADD stack.tgz /linker/
 ADD entrypoint.sh /entrypoint.sh
 RUN chmod 755 /entrypoint.sh
 
-EXPOSE 8081-8089
+EXPOSE 8081-8089/udp
 
 ENTRYPOINT ["/usr/bin/supervisord"]
 

@@ -9,6 +9,8 @@ RUN yum -y install protobuf.x86_64 protobuf-c.x86_64 protobuf-c-devel.x86_64
 RUN yum install -y python-setuptools && \
     easy_install supervisor
 
+RUN yum -y install tcpdump
+
 ADD supervisord.conf /etc/supervisord.conf
 
 ADD router.tgz /linker/
@@ -16,7 +18,7 @@ ADD router.tgz /linker/
 ADD entrypoint.sh /entrypoint.sh
 RUN chmod 755 /entrypoint.sh
 
-EXPOSE 8000-9000
+EXPOSE 8081/udp 8000-9000
 
 ENTRYPOINT ["/usr/bin/supervisord"]
 

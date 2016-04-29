@@ -31,7 +31,7 @@ ADD stack.tgz /linker/
 ADD entrypoint.sh /entrypoint.sh
 RUN chmod 755 /entrypoint.sh
 
-EXPOSE 3868 3869 7000-8000
+EXPOSE 3868 3869 7000-8000/udp
 
 ENTRYPOINT ["/usr/bin/supervisord"]
 
