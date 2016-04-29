@@ -2,6 +2,6 @@
 
 cd /linker/router
 
-./router
+./router > router.log &
 
 echo "router Started"
