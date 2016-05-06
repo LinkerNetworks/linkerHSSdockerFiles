@@ -3,7 +3,6 @@ From centos:7
 MAINTAINER linker
 
 WORKDIR /linker/router
-
 RUN yum -y install protobuf.x86_64 protobuf-c.x86_64 protobuf-c-devel.x86_64
 
 RUN yum install -y python-setuptools && \
@@ -17,6 +16,8 @@ ADD router.tgz /linker/
 
 ADD entrypoint.sh /entrypoint.sh
 RUN chmod 755 /entrypoint.sh
+
+RUN yum -y install net-tools
 
 EXPOSE 8081/udp 8000-9000
 

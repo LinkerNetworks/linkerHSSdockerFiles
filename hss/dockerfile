@@ -16,6 +16,7 @@ ADD supervisord.conf /etc/supervisord.conf
 RUN chmod 755 /*.sh
 RUN chmod 755 $HSS_HOME/*.sh
 
+
 EXPOSE 5001 5002
 
 CMD ["/usr/bin/supervisord", "-n", "-c", "/etc/supervisord.conf"]
