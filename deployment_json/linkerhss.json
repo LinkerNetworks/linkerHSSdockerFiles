@@ -87,7 +87,7 @@
       "container": {
         "type": "DOCKER",
         "docker": {
-          "image": "njrepo:5000/linker_router",
+          "image": "njrepo:5000/linker_hss_router",
           "privileged": true,
           "parameters": [{
             "key": "net-alias",
