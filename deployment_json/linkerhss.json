@@ -44,7 +44,7 @@
         }
       },
       "instances": 1,
-      "cpus": 0.1,
+      "cpus": 0.5,
       "mem": 4096,
       "env": {
         "TRANSMIT_PACKAGE_NUMBER_LOW_THRESHOLD": "20",
@@ -107,7 +107,7 @@
         }
       },
       "instances": 1,
-      "cpus": 0.1,
+      "cpus": 0.5,
       "mem": 4096,
       "env": {
         "TRANSMIT_PACKAGE_NUMBER_LOW_THRESHOLD": "20",
