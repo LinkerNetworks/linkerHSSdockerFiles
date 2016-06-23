@@ -1,11 +1,7 @@
 {
-  "service_group_id" : "linkerhss",
+  "service_group_id" : "/linkerhss",
   "repair_template_id" : "linkerhss",
-  "app_container_id" : "es",
-  "time_create" : "2016-02-15T13:55:05+08:00",
-  "time_update" : "2016-02-15T13:55:05+08:00",
-  "user_id" : "",
-  "tenant_id" : "",
+  "app_container_id" : "/linkerhss/es",
   "polices" : [{
       "conditions" : [{
           "name" : "HighLoadAlert",
@@ -13,7 +9,7 @@
         }],
       "actions" : [{
           "type" : "SCALE",
-          "app_container_id" :  "es",
+          "app_container_id" :  "/linkerhss/es",
           "parameter" : [{
               "name" : "SCALESTEP",
               "value" : "1"
@@ -27,7 +23,7 @@
         }],
       "actions" : [{
           "type" : "SCALE",
-          "app_container_id" : "es",
+          "app_container_id" : "/linkerhss/es",
           "parameter" : [{
               "name" : "SCALESTEP",
               "value" : "-1"
