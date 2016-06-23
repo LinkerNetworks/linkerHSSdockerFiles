@@ -4,7 +4,7 @@
   "app_container_id" : "/linkerhss/es",
   "polices" : [{
       "conditions" : [{
-          "name" : "HighCPUAlert",
+          "name" : "HighCpuAlert",
           "value" : "1"
         }],
       "actions" : [{
@@ -18,7 +18,7 @@
       "notifications" : []
     }, {
       "conditions" : [{
-          "name" : "LowCPUAlert",
+          "name" : "LowCpuAlert",
           "value" : "1"
         }],
       "actions" : [{
