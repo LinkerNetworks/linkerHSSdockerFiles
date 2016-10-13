@@ -13,7 +13,7 @@
                 "actions": [
                     {
                         "type": "SCALE",
-                        "app_container_id": "/linkerhss/decoder",
+                        "app_container_id": "/linkerhss/hss",
                         "parameter": [
                             {
                                 "name": "SCALESTEP",
@@ -34,7 +34,7 @@
                 "actions": [
                     {
                         "type": "SCALE",
-                        "app_container_id": "/linkerhss/decoder",
+                        "app_container_id": "/linkerhss/hss",
                         "parameter": [
                             {
                                 "name": "SCALESTEP",

@@ -7,7 +7,7 @@
       {
         "id": "stack",
         "dependencies": [
-          "/linkerhss/decoder"
+          "/linkerhss/hss"
         ],
         "labels": {
           "HAPROXY_GROUP": "linkermgmt"
@@ -23,12 +23,16 @@
                 "value": "stack.linker.com"
               },
               {
+                "key": "net-alias",
+                "value": "router.linker.com"
+              },
+              {
                 "key": "net",
                 "value": "myoverlay"
               }
             ],
             "network": "BRIDGE",
-            "forcePullImage": true,
+            "forcePullImage": false,
             "portMappings": [
               {
                 "containerPort": 3869,
@@ -47,90 +51,24 @@
                 "hostPort": 0,
                 "servicePort": 10089,
                 "protocol": "udp"
-              }
-            ]
-          }
-        },
-        "instances": 1,
-        "cpus": 0.5,
-        "mem": 4096,
-        "env": {
-          "TRANSMIT_PACKAGE_NUMBER_LOW_THRESHOLD": "20",
-          "TRANSMIT_PACKAGE_NUMBER_HIGH_THRESHOLD": "100",
-          "IDEAL_NODE_NUMBER": "2",
-          "ALERT_ENABLE": "true"
-        }
-      },
-      {
-        "id": "decoder",
-        "dependencies": [
-          "/linkerhss/router"
-        ],
-        "container": {
-          "type": "DOCKER",
-          "docker": {
-            "image": "linkerrepository/linker_decoder",
-            "privileged": true,
-            "parameters": [
-              {
-                "key": "net-alias",
-                "value": "decoder.linker.com"
               },
-              {
-                "key": "net",
-                "value": "myoverlay"
-              }
-            ],
-            "forcePullImage": true,
-            "network": "BRIDGE"
-          }
-        },
-        "instances": 2,
-        "cpus": 0.1,
-        "mem": 2048
-      },
-      {
-        "id": "router",
-        "dependencies": [
-          "/linkerhss/hss"
-        ],
-        "labels": {
-          "HAPROXY_GROUP": "linkermgmt"
-        },
-        "container": {
-          "type": "DOCKER",
-          "docker": {
-            "image": "linkerrepository/linker_hss_router",
-            "privileged": true,
-            "parameters": [
-              {
-                "key": "net-alias",
-                "value": "router.linker.com"
-              },
-              {
-                "key": "net",
-                "value": "myoverlay"
-              }
-            ],
-            "portMappings": [
               {
                 "containerPort": 8000,
                 "hostPort": 0,
                 "protocol": "udp",
                 "servicePort": 10088
               }
-            ],
-            "forcePullImage": true,
-            "network": "BRIDGE"
+            ]
           }
         },
         "instances": 1,
-        "cpus": 0.5,
-        "mem": 4096,
+        "cpus": 0.2,
+        "mem": 2046,
         "env": {
           "TRANSMIT_PACKAGE_NUMBER_LOW_THRESHOLD": "20",
           "TRANSMIT_PACKAGE_NUMBER_HIGH_THRESHOLD": "100",
-          "IDEAL_NODE_NUMBER": "2",
+          "INSTANCE_MIN_NUM": "2",
+          "INSTANCE_MAX_NUM": "5",
           "ALERT_ENABLE": "true"
         }
       },
@@ -171,13 +109,13 @@
                 "servicePort": 10052
               }
             ],
-            "forcePullImage": true,
+            "forcePullImage": false,
             "network": "BRIDGE"
           }
         },
         "instances": 2,
         "cpus": 0.1,
-        "mem": 2048
+        "mem": 1024
       },
       {
         "id": "es",
@@ -217,20 +155,46 @@
                 "servicePort": 10093
               }
             ],
-            "forcePullImage": true,
+            "forcePullImage": false,
             "network": "BRIDGE"
           }
         },
         "instances": 2,
         "cpus": 0.1,
-        "mem": 2048,
+        "mem": 1024,
         "env": {
-          "CPU_USAGE_LOW_THRESHOLD": "20",
-          "CPU_USAGE_HIGH_THRESHOLD": "50",
-          "IDEAL_NODE_NUMBER": "2",
+          "MEMORY_USAGE_LOW_THRESHOLD": "20",
+          "MEMORY_USAGE_HIGH_THRESHOLD": "30",
+          "INSTANCE_MIN_NUM": "2",
+	  "INSTANCE_MAX_NUM": "5",
           "ALERT_ENABLE": "true"
         }
-      }
+      },{
+      "id": "seagull",
+      "labels": {
+        "HAPROXY_GROUP": "linkermgmt"
+      },
+      "container": {
+        "type": "DOCKER",
+        
+        "docker": {
+          "image": "linkerrepository/linker_seagull",
+          "privileged": true,
+          "parameters": [{
+            "key": "net-alias",
+            "value": "seagull.linker.com"
+          }, {
+            "key": "net",
+            "value": "myoverlay"
+          }],
+          "forcePullImage": true,
+          "network": "BRIDGE"
+        }
+      },
+      "instances": 1,
+      "cpus": 0.1,
+      "mem": 512
+    }
     ]
   }
 }
